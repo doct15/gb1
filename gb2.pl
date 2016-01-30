@@ -53,7 +53,7 @@ print header(
     -Last_Modified => strftime('%a, %d %b %Y %H:%M:%S GMT', gmtime),
     # HTTP/1.0
     -Pragma        => 'no-cache',
-    #-ETag          => "$timer_var",
+    -ETag          => "$timer_var",
     # HTTP/1.1 + IE-specific (pre|post)-check
     -Cache_Control => join(', ', qw(
         private
