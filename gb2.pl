@@ -7,13 +7,16 @@ use CGI;
 use Data::Dumper;
 use POSIX qw(strftime);
 
+$timer_var=time;
+
 print header(
     # date in the past
-    -expires       => 'Sat, 26 Jul 1997 05:00:00 GMT',
+    -expires       => 'Sun, 3 Jan 2016 05:00:00 GMT',
     # always modified
     -Last_Modified => strftime('%a, %d %b %Y %H:%M:%S GMT', gmtime),
     # HTTP/1.0
     -Pragma        => 'no-cache',
+    #-ETag          => "$timer_var",
     # HTTP/1.1 + IE-specific (pre|post)-check
     -Cache_Control => join(', ', qw(
         private
@@ -51,7 +54,6 @@ $response = $temp[1];
 
 
 
-$timer_var=time;
 $redirect_url="http://$in_server/build-unknown-yellow.svg?sig=$timer_var";
 
 if ($response eq "pending") { $redirect_url = "http://$in_server/build-pending-yellow.svg?sig=$timer_var"; }
