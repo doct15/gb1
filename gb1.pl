@@ -30,12 +30,13 @@ $response = $temp[1];
 
 print Dumper(@test);
 
-$redirect_url="http://$in_server/build-unknown-yellow.svg";
+$timer_var=time;
+$redirect_url="http://$in_server/build-unknown-yellow.svg?sig=$timer_var";
 
-if ($response eq "pending") { $redirect_url = "http://$in_server/build-pending-yellow.svg"; }
-if ($response eq "failure") { $redirect_url = "http://$in_server/build-failure-red.svg"; }
-if ($response eq "error") { $redirect_url = "http://$in_server/build-error-red.svg"; }
-if ($response eq "success") { $redirect_url = "http://$in_server/build-success-green.svg"; }
+if ($response eq "pending") { $redirect_url = "http://$in_server/build-pending-yellow.svg?sig=$timer_var"; }
+if ($response eq "failure") { $redirect_url = "http://$in_server/build-failure-red.svg?sig=$timer_var"; }
+if ($response eq "error") { $redirect_url = "http://$in_server/build-error-red.svg?sig=$timer_var"; }
+if ($response eq "success") { $redirect_url = "http://$in_server/build-success-green.svg?sig=$timer_var"; }
 
 print "$redirect_url<br>";
 
