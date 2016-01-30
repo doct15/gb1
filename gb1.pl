@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 
-#use CGI qw(param);
+use CGI qw(param);
 use CGI;
 use Data::Dumper;
 
