@@ -2,8 +2,29 @@
 #
 
 use CGI qw(param);
+use CGI qw(:standard);
 use CGI;
 use Data::Dumper;
+use POSIX qw(strftime);
+
+print header(
+    # date in the past
+    -expires       => 'Sat, 26 Jul 1997 05:00:00 GMT',
+    # always modified
+    -Last_Modified => strftime('%a, %d %b %Y %H:%M:%S GMT', gmtime),
+    # HTTP/1.0
+    -Pragma        => 'no-cache',
+    # HTTP/1.1 + IE-specific (pre|post)-check
+    -Cache_Control => join(', ', qw(
+        private
+        no-cache
+        no-store
+        must-revalidate
+        max-age=0
+        pre-check=0
+        post-check=0
+    )),
+);
 
 print "Content-type: text/html\n\n";
 
