@@ -7,8 +7,6 @@ use CGI;
 use Data::Dumper;
 use POSIX qw(strftime);
 
-print "Content-type: text/html\n\n";
-
 $in_url=CGI->new->url();
 $in_server = $ENV{SERVER_NAME};
 $repo_owner = param("repo_owner");
@@ -32,19 +30,21 @@ $response = $temp[1];
 
 print Dumper(@test);
 
-$timer_var=time;
-$redirect_url="http://$in_server/build-unknown-yellow.svg?sig=$timer_var";
+$redirect_url="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"98\" height=\"20\"><linearGradient id=\"b\" x2=\"0\" y2=\"100%\"><stop offset=\"0\" stop-color=\"#bbb\" stop-opacity=\".1\"/><stop offset=\"1\" stop-opacity=\".1\"/></linearGradient><mask id=\"a\"><rect width=\"98\" height=\"20\" rx=\"3\" fill=\"#fff\"/></mask><g mask=\"url(#a)\"><path fill=\"#555\" d=\"M0 0h37v20H0z\"/><path fill=\"#dfb317\" d=\"M37 0h61v20H37z\"/><path fill=\"url(#b)\" d=\"M0 0h98v20H0z\"/></g><g fill=\"#fff\" text-anchor=\"middle\" font-family=\"DejaVu Sans,Verdana,Geneva,sans-serif\" font-size=\"11\"><text x=\"18.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">build</text><text x=\"18.5\" y=\"14\">build</text><text x=\"66.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">unknown</text><text x=\"66.5\" y=\"14\">unknown</text></g></svg>";
 
-if ($response eq "pending") { $redirect_url = "http://$in_server/build-pending-yellow.svg?sig=$timer_var"; }
-if ($response eq "failure") { $redirect_url = "http://$in_server/build-failure-red.svg?sig=$timer_var"; }
-if ($response eq "error") { $redirect_url = "http://$in_server/build-error-red.svg?sig=$timer_var"; }
-if ($response eq "success") { $redirect_url = "http://$in_server/build-success-green.svg?sig=$timer_var"; }
+if ($response eq "pending") { $redirect_url = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"92\" height=\"20\"><linearGradient id=\"b\" x2=\"0\" y2=\"100%\"><stop offset=\"0\" stop-color=\"#bbb\" stop-opacity=\".1\"/><stop offset=\"1\" stop-opacity=\".1\"/></linearGradient><mask id=\"a\"><rect width=\"92\" height=\"20\" rx=\"3\" fill=\"#fff\"/></mask><g mask=\"url(#a)\"><path fill=\"#555\" d=\"M0 0h37v20H0z\"/><path fill=\"#dfb317\" d=\"M37 0h55v20H37z\"/><path fill=\"url(#b)\" d=\"M0 0h92v20H0z\"/></g><g fill=\"#fff\" text-anchor=\"middle\" font-family=\"DejaVu Sans,Verdana,Geneva,sans-serif\" font-size=\"11\"><text x=\"18.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">build</text><text x=\"18.5\" y=\"14\">build</text><text x=\"63.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">pending</text><text x=\"63.5\" y=\"14\">pending</text></g></svg>"; }
+if ($response eq "failure") { $redirect_url = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"83\" height=\"20\"><linearGradient id=\"b\" x2=\"0\" y2=\"100%\"><stop offset=\"0\" stop-color=\"#bbb\" stop-opacity=\".1\"/><stop offset=\"1\" stop-opacity=\".1\"/></linearGradient><mask id=\"a\"><rect width=\"83\" height=\"20\" rx=\"3\" fill=\"#fff\"/></mask><g mask=\"url(#a)\"><path fill=\"#555\" d=\"M0 0h37v20H0z\"/><path fill=\"#e05d44\" d=\"M37 0h46v20H37z\"/><path fill=\"url(#b)\" d=\"M0 0h83v20H0z\"/></g><g fill=\"#fff\" text-anchor=\"middle\" font-family=\"DejaVu Sans,Verdana,Geneva,sans-serif\" font-size=\"11\"><text x=\"18.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">build</text><text x=\"18.5\" y=\"14\">build</text><text x=\"59\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">failure</text><text x=\"59\" y=\"14\">failure</text></g></svg>"; }
+if ($response eq "error") { $redirect_url = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"76\" height=\"20\"><linearGradient id=\"b\" x2=\"0\" y2=\"100%\"><stop offset=\"0\" stop-color=\"#bbb\" stop-opacity=\".1\"/><stop offset=\"1\" stop-opacity=\".1\"/></linearGradient><mask id=\"a\"><rect width=\"76\" height=\"20\" rx=\"3\" fill=\"#fff\"/></mask><g mask=\"url(#a)\"><path fill=\"#555\" d=\"M0 0h37v20H0z\"/><path fill=\"#e05d44\" d=\"M37 0h39v20H37z\"/><path fill=\"url(#b)\" d=\"M0 0h76v20H0z\"/></g><g fill=\"#fff\" text-anchor=\"middle\" font-family=\"DejaVu Sans,Verdana,Geneva,sans-serif\" font-size=\"11\"><text x=\"18.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">build</text><text x=\"18.5\" y=\"14\">build</text><text x=\"55.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">error</text><text x=\"55.5\" y=\"14\">error</text></g></svg>"; }
+if ($response eq "success") { $redirect_url = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"91\" height=\"20\"><linearGradient id=\"b\" x2=\"0\" y2=\"100%\"><stop offset=\"0\" stop-color=\"#bbb\" stop-opacity=\".1\"/><stop offset=\"1\" stop-opacity=\".1\"/></linearGradient><mask id=\"a\"><rect width=\"91\" height=\"20\" rx=\"3\" fill=\"#fff\"/></mask><g mask=\"url(#a)\"><path fill=\"#555\" d=\"M0 0h37v20H0z\"/><path fill=\"#97CA00\" d=\"M37 0h54v20H37z\"/><path fill=\"url(#b)\" d=\"M0 0h91v20H0z\"/></g><g fill=\"#fff\" text-anchor=\"middle\" font-family=\"DejaVu Sans,Verdana,Geneva,sans-serif\" font-size=\"11\"><text x=\"18.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">build</text><text x=\"18.5\" y=\"14\">build</text><text x=\"63\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">success</text><text x=\"63\" y=\"14\">success</text></g></svg>"; }
 
 print "$redirect_url<br>";
 
 
+$timer_var=time;
 
 print header(
+    # Content-type
+    -type          => 'text/html',
     # date in the past
     -expires       => 'Sun, 3 Jan 2016 05:00:00 GMT',
     # always modified
@@ -65,5 +65,5 @@ print header(
 	#-Location => "$redirect_url",
 );
 
-print "Location: $redirect_url\n\n";
+print "$redirect_url\n\n";
 
