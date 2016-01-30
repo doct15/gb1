@@ -45,6 +45,8 @@ if ($response eq "success") { $redirect_url = "<svg xmlns=\"http://www.w3.org/20
 $timer_var=time;
 
 print header(
+    # Content-type
+    -type          => 'image/svg+xml',
     # date in the past
     -expires       => 'Sun, 3 Jan 2016 05:00:00 GMT',
     # always modified
@@ -64,7 +66,6 @@ print header(
     )),
     #-Location => "$redirect_url",
 );
-print "Content-Type: image/svg+xml\n\n";
 print "$redirect_url\n\n";
 #print "Location: $redirect_url\n\n";
 
