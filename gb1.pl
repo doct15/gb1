@@ -13,17 +13,17 @@ $repo_owner = param("repo_owner");
 $repo_name = param("repo_name");
 $repo_branch = param("repo_branch");
 
-print "$in_url<br>";
-print "$in_server<br>";
-print "$repo_owner<br>";
-print "$repo_name<br>";
-print "$repo_branch<br>";
+print "$in_url<br>\n";
+print "$in_server<br>\n";
+print "$repo_owner<br>\n";
+print "$repo_name<br>\n";
+print "$repo_branch<br>\n";
 
-print "https://api.github.com/repos/$repo_owner/$repo_name/status/$repo_branch<br>";
+print "https://api.github.com/repos/$repo_owner/$repo_name/status/$repo_branch<br>\n";
 
 $response = `set -x;curl -q -k "https://api.github.com/repos/$repo_owner/$repo_name/status/$repo_branch" | jq '.state'`;
 
-print "|$response|<br>";
+print "|$response|<br>\n";
 
 @temp = split /"/, $response;
 $response = $temp[1];
