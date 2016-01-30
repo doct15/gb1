@@ -51,7 +51,7 @@ print header(
     -Last_Modified => strftime('%a, %d %b %Y %H:%M:%S GMT', gmtime),
     # HTTP/1.0
     -Pragma        => 'no-cache',
-    -ETag          => "$timer_var",
+    #-ETag          => "$timer_var",
     # HTTP/1.1 + IE-specific (pre|post)-check
     -Cache_Control => join(', ', qw(
         private
@@ -62,7 +62,7 @@ print header(
         pre-check=0
         post-check=0
     )),
-	-Location => "$redirect_url",
+	#-Location => "$redirect_url",
 );
 
 print "Location: $redirect_url\n\n";

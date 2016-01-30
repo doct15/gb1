@@ -33,12 +33,12 @@ $response = $temp[1];
 
 
 $timer_var=time;
-$redirect_url="http://$in_server/build-unknown-yellow.svg?sig=$timer_var";
+$redirect_url="/build-unknown-yellow.svg?sig=$timer_var";
 
-if ($response eq "pending") { $redirect_url = "http://$in_server/build-pending-yellow.svg?sig=$timer_var"; }
-if ($response eq "failure") { $redirect_url = "http://$in_server/build-failure-red.svg?sig=$timer_var"; }
-if ($response eq "error") { $redirect_url = "http://$in_server/build-error-red.svg?sig=$timer_var"; }
-if ($response eq "success") { $redirect_url = "http://$in_server/build-success-green.svg?sig=$timer_var"; }
+if ($response eq "pending") { $redirect_url = "/build-pending-yellow.svg?sig=$timer_var"; }
+if ($response eq "failure") { $redirect_url = "/build-failure-red.svg?sig=$timer_var"; }
+if ($response eq "error") { $redirect_url = "/build-error-red.svg?sig=$timer_var"; }
+if ($response eq "success") { $redirect_url = "/build-success-green.svg?sig=$timer_var"; }
 
 
 
@@ -51,7 +51,7 @@ print header(
     -Last_Modified => strftime('%a, %d %b %Y %H:%M:%S GMT', gmtime),
     # HTTP/1.0
     -Pragma        => 'no-cache',
-    -ETag          => "$timer_var",
+    #-ETag          => "$timer_var",
     # HTTP/1.1 + IE-specific (pre|post)-check
     -Cache_Control => join(', ', qw(
         private
@@ -62,8 +62,8 @@ print header(
         pre-check=0
         post-check=0
     )),
-	-Location => "$redirect_url",
+	#-Location => "$redirect_url",
 );
-
+print "<img src=\"$redirect_url\" alt=\"Powered by Distelli\">";
 #print "Location: $redirect_url\n\n";
 
