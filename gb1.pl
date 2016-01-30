@@ -7,28 +7,6 @@ use CGI;
 use Data::Dumper;
 use POSIX qw(strftime);
 
-$timer_var=time;
-
-print header(
-    # date in the past
-    -expires       => 'Sun, 3 Jan 2016 05:00:00 GMT',
-    # always modified
-    -Last_Modified => strftime('%a, %d %b %Y %H:%M:%S GMT', gmtime),
-    # HTTP/1.0
-    -Pragma        => 'no-cache',
-    -ETag          => "$timer_var",
-    # HTTP/1.1 + IE-specific (pre|post)-check
-    -Cache_Control => join(', ', qw(
-        private
-        no-cache
-        no-store
-        must-revalidate
-        max-age=0
-        pre-check=0
-        post-check=0
-    )),
-);
-
 print "Content-type: text/html\n\n";
 
 $in_url=CGI->new->url();
@@ -54,6 +32,7 @@ $response = $temp[1];
 
 print Dumper(@test);
 
+$timer_var=time;
 $redirect_url="http://$in_server/build-unknown-yellow.svg?sig=$timer_var";
 
 if ($response eq "pending") { $redirect_url = "http://$in_server/build-pending-yellow.svg?sig=$timer_var"; }
@@ -62,6 +41,29 @@ if ($response eq "error") { $redirect_url = "http://$in_server/build-error-red.s
 if ($response eq "success") { $redirect_url = "http://$in_server/build-success-green.svg?sig=$timer_var"; }
 
 print "$redirect_url<br>";
+
+
+
+print header(
+    # date in the past
+    -expires       => 'Sun, 3 Jan 2016 05:00:00 GMT',
+    # always modified
+    -Last_Modified => strftime('%a, %d %b %Y %H:%M:%S GMT', gmtime),
+    # HTTP/1.0
+    -Pragma        => 'no-cache',
+    -ETag          => "$timer_var",
+    # HTTP/1.1 + IE-specific (pre|post)-check
+    -Cache_Control => join(', ', qw(
+        private
+        no-cache
+        no-store
+        must-revalidate
+        max-age=0
+        pre-check=0
+        post-check=0
+    )),
+	-Location => "$redirect_url",
+);
 
 print "Location: $redirect_url\n\n";
 
