@@ -21,7 +21,7 @@ print "$repo_branch<br>\n";
 
 print "https://api.github.com/repos/$repo_owner/$repo_name/status/$repo_branch<br>\n";
 
-$response = `set -x;curl -q -k "https://api.github.com/repos/$repo_owner/$repo_name/status/$repo_branch" | jq '.state'`;
+$response = `curl -q -k "https://api.github.com/repos/$repo_owner/$repo_name/status/$repo_branch" | jq '.state'`;
 
 print "|$response|<br>\n";
 
