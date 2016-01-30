@@ -8,7 +8,8 @@ use Data::Dumper;
 print "Content-type: text/html\n\n";
 
 $in_url=CGI->new->url();
-$in_server=CGI->new->server_name();
+#$in_server = param("server_name");
+$in_server = $ENV{SERVER_NAME};
 $repo_owner = param("repo_owner");
 $repo_name = param("repo_name");
 $repo_branch = param("repo_branch");
