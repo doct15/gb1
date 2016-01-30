@@ -1,21 +1,20 @@
 #!/usr/bin/perl
 #
-#
 
-#use GD;
-use CGI qw(param);
+#use CGI qw(param);
 use CGI;
 use Data::Dumper;
 
-#print "Content-type: image/gif\n\n";
 print "Content-type: text/html\n\n";
 
 $in_url=CGI->new->url();
+$in_server=CGI->new->server_name();
 $repo_owner = param("repo_owner");
 $repo_name = param("repo_name");
 $repo_branch = param("repo_branch");
 
 print "$in_url<br>";
+print "$in_server<br>"
 print "$repo_owner<br>";
 print "$repo_name<br>";
 print "$repo_branch<br>";

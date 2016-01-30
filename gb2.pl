@@ -7,6 +7,7 @@ use CGI;
 use Data::Dumper;
 
 $in_url=CGI->new->url();
+$in_server=CGI->new->server_name();
 $repo_owner = param("repo_owner");
 $repo_name = param("repo_name");
 $repo_branch = param("repo_branch");
